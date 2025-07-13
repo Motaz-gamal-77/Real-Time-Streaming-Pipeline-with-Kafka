@@ -6,7 +6,7 @@ This repository documents my implementation of a data pipeline using Kafka, MySQ
 ## Architecture Diagram
 The implemented solution follows this workflow:
 
-![Data Pipeline Architecture](docs/pipeline_architecture.png)
+![Data Pipeline Architecture](docs/pipeline_architecture.jpg)
 
 ## Key Components
  - MySQL – Source database with initial data.
