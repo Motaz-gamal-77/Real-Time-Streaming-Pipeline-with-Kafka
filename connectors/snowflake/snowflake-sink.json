@@ -1,0 +1,38 @@
+{
+  "name": "snowflake-sink-ecomm",
+  "config": {
+    "connector.class": "com.snowflake.kafka.connector.SnowflakeSinkConnector",
+    "tasks.max": "1",
+
+    "topics.regex": "kafka-workshop.*",
+
+    "snowflake.url.name": "YREDIGW-DB28773.snowflakecomputing.com",
+    "snowflake.user.name": "MOATAZGAMAL710",
+    "snowflake.private.key": "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDKhzsGk5lLGwX3Fl9HjLJVUQYvZ8iGzlkkGijLYfWWw18oXB1uABSbHmRmlk+Fdm7kVsVxsOLvVmXIRftqLPFFpTkbsgGNDaECeNd6/0wknXoLlXe+dIproJ4row2IcFfF+J02p9hE/Q19MfdKIxjxo7pBKtdUXON9Pn6CEYW80VSdmzHmi4ZMhMyNZ/iSvcRdRRcwGmbqlcBAER4vpiWtrVgr6WjrL5YoOIElr9j0iia0b8GcbuW2esQ8UnCFwEP8mngSSupBx421FlR0b/u0C0ygBXYhckue6jSDWbriVqNRks7H8QtysjR/4rums8uUFaTkKt3u4fP84eWtZAijAgMBAAECggEAAqIHbmp0z7kmNrQfwPpfRySqg+tBfB8qoYGFjj9TxgX8MrYf29I8clfOzlad6gpEHsvR/UxjZuEkqZnfTt4OtO0U9Ps3cfH/adzQUFUJVGCHuabTy7IQKp4H8GFKR7/OJFC7Gn7MHPl9N2dy44/ZPyr1vOslqX8bpgEt+9rmdjHsjUUg6lt5el5o9Ly8/jZoyV3hMDEqfZPwiQRW7DcorL3gPvSsgZW41t7kW6tDEVVa8t3QUhMjcxfPYcOODDFTdogey9sCnhHTxEQpiz3Tr4NYh1F5WHAQ9cJ7lrc8pLIjQ63WhkStrcVTdwvlDxdAgCwI8fPoJe+f63xql+zI4QKBgQDx8RjfvYVv9XcgBkycjoEIbjzQdE90QynGfU2NUFLedEiDG0a0ES55gi3I9uQlYwmpEnrAPjjDiEMmil/CKNSERnPTwTZA8X7mT+L5T1nMsOPRpyjhlGB1dZZKEA2K3aOCq6Tc7rDwZwDZGpeGelqQv1Rb8r8Y5btdF6zzQcpKJQKBgQDWS9qabWnkglrMCGaOz4jAzvt9ZcCG3Mau9Pre0+IIwaQ8LTRLnAn/oBz6t+yIC/dRGLbAgAbNYOsncCoGLQiyiJrTMn2u/5/W12Z+LbBYrOj4XmtngdQe7Wa9nusHLLpZyttBJAGft9xA16of2B+pk7FTKac7d8qwZuialKa5JwKBgFgTfwykf9k8MPu1j1pG/m5FQ1pXnT0j3idmIj9ZiHF3P5aK7XhL8PFHFMfeKTv7C99C3PDzNdLo3hk/spCKMKNeynfCFLAbuii52FUOMBC2LJl8EwPb8imQfv/DTErLWOUO+1t6gWti9AoVBihsjl+3Z0x52FuF9mlzXwDHaI8JAoGAMKpLO5SrXpRn0Dv8JmRk9vxKSoDoBvhuOl8x9ZaCl2B6Tpwpax5FewK+cgWAtqiZApatMewhH1TqMiubr4lcl0bEej/WIP62KtEB2pe/m3Ow+G5gz8HBDUD2ewty7k8vBqM1xYZKxB257BPN86teDWGX/H3SF4QtyH+mRSyK7DMCgYASGmcyX3dRRCiw0E7okg5ndEyWWfnV+eyiGogSI4qD4vEMjdrx2LS3BG4gOH9lQTo4fo/RIpZ2RnlLCNoA9zqLIkY2fmhGz/jeDC90ls4GHfFjX5FDED63782FnWXQrtb87jN2jpwGsI9a7e7vVGTvGergRoesuXa3imfQ+sAsNQ==",
+    "snowflake.database.name": "NOSQL_ECOMM",
+    "snowflake.schema.name": "PUBLIC",
+    "snowflake.stage.name": "KAFKA_STAGE",
+    "snowflake.role.name": "ACCOUNTADMIN",
+
+    "buffer.count.records": "500",
+    "buffer.size.bytes": "5000000",
+    "buffer.flush.time": "60",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter.schemas.enable": "true",
+
+    "snowflake.metadata.topic2table.map": "kafka-workshop4.ecomm.users:USERS, kafka-workshop4.ecomm.products:PRODUCTS, kafka-workshop4.ecomm.orders:ORDERS, kafka-workshop4.ecomm.order_items:ORDER_ITEMS",
+
+    "transforms": "insertTS,formatTS",
+    "transforms.insertTS.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+    "transforms.insertTS.timestamp.field": "messageTS",
+    "transforms.formatTS.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+    "transforms.formatTS.field": "messageTS",
+    "transforms.formatTS.target.type": "string",
+    "transforms.formatTS.format": "yyyy-MM-dd HH:mm:ss:SSS"
+  }
+}
